@@ -1,0 +1,48 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Educational Software Documentation",
+        "contact": {
+            "email": "gustavohgustavo@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/initial": {
+            "get": {
+                "tags": [
+                    "Initial"
+                ],
+                "summary": "Get Hello World",
+                "description": "This endpoint returns a Hello World.",
+                "operationId": "41ec2d285ccb624e7c5dea6af4ce8ee5",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "hello": {
+                                            "type": "string",
+                                            "example": "Olá mundo!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
