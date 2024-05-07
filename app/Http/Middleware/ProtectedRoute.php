@@ -18,7 +18,6 @@ class ProtectedRoute
 
     public function __construct()
     {
-        // Configure the signing configuration (chave secreta como exemplo)
         $this->config = Configuration::forSymmetricSigner(
             new Sha256(),
             InMemory::plainText("s7m5d9g0yh2imZ0kQbIXTIJNz2jper7PfI0MbIs77GoXQmqce4uKXFZaSAV5Icno") // Use uma chave forte
@@ -38,10 +37,8 @@ class ProtectedRoute
             return response()->json(["error" => "Invalid token"], 401);
         }
 
-       // Configure o relógio do sistema para validar se o token não expirou
        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
-       // Valide a assinatura e se não expirou
        $constraints = [
            new ValidAt($clock)
        ];
@@ -50,7 +47,6 @@ class ProtectedRoute
             return response()->json(["error" => "Expired or invalid token"], 401);
         }
 
-        // Continue para a próxima etapa da requisição
         return $next($request);
     }
 }
