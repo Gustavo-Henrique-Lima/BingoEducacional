@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string("password");
             $table->string("role");
             $table->string("recuperationCode")->nullable();;
+            $table->boolean('isActive')->default(true);
+            $table->string("activationCode")->nullable();;
             $table->rememberToken();
             $table->timestamps();
         });

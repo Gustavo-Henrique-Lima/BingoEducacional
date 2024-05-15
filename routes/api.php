@@ -13,6 +13,9 @@ Route::prefix('users')->group(function () {
     Route::middleware([ProtectedRoute::class])->group(function () {
         Route::patch("/{email}/updatepassword", [UserController::class, "updatePassword"]);
     });
-    Route::post("/{email}/saveCode", [UserController::class, "saveCode"]);
+    Route::post("/{email}/saveRecoverPasswordCode", [UserController::class, "saveRecoverPasswordCode"]);
     Route::patch("/{email}/recoverpassword", [UserController::class, "recoverPassword"]);
+    Route::post("/{email}/saveActivationCode", [UserController::class, "saveActivationCode"]);
+    Route::patch("/{email}/activeAccount", [UserController::class, "activeAccount"]);
+    Route::post("/saveUser", [UserController::class, "saveUser"]);
 });
