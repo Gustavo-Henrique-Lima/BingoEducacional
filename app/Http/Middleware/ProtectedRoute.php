@@ -47,6 +47,10 @@ class ProtectedRoute
             return response()->json(["error" => "Expired or invalid token"], 401);
         }
 
+        if ($parsedToken->claims()->has('active') && $parsedToken->claims()->get('active') === 0) {
+            return response()->json(["error" => "Você precisa ativar sua conta"], 403);
+        }
+
         return $next($request);
     }
 }

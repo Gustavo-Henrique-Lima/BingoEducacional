@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -47,7 +48,7 @@ class UserController extends Controller
         return response()->json(['message' => 'Erro ao atualizar a senha'], 500);
     }
 
-    public function saveCode(Request $request, $email)
+    public function saveRecoverPasswordCode(Request $request, $email)
     {
         $user = $this->userService->findUserByEmail($email);
 
@@ -90,5 +91,71 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => 'Erro ao atualizar a senha'], 500);
+    }
+
+    public function saveActivationCode(Request $request, $email)
+    {
+        $user = $this->userService->findUserByEmail($email);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
+        $code = $request->input('code');
+
+        if ($this->userService->saveCodeActivation($user, $code)) {
+            return response()->json(['message' => 'Código salvo com sucesso'], 200);
+        }
+
+        return response()->json(['message' => 'Erro ao tentar salvar código'], 500);
+    }
+
+    public function activeAccount(Request $request, $email)
+    {
+        $user = $this->userService->findUserByEmail($email);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
+        $code = $request->code;
+
+        if ($code === $user->activationCode) {
+            if ($this->userService->activeAccount($user)) {
+                return response()->json(['message' => 'Conta ativada com sucesso'], 200);
+            }
+        } else {
+            return response()->json(['message' => 'Código de ativação inválido'], 404);
+        }
+
+        return response()->json(['message' => 'Erro ao atualizar a senha'], 500);
+    }
+
+    public function saveUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:8',
+            'email' => 'required|email|min:25',
+            'password' => 'required|string|min:6',
+            'role' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json("A senha deve conter no mínimo 6 caracteres", 422);
+        }
+
+        $user = $this->userService->findUserByEmail($request->email);
+
+        if ($user) {
+            return response()->json(['message' => 'Esse email já está cadastrado'], 409);
+        }
+
+        $user = User::create($request->only(['name', 'email', 'password', 'role']));
+
+        if ($this->userService->saveUser($user)) {
+            return response()->json(['message' => 'Usuário cadastrado com sucesso'], 201);
+        }
+
+        return response()->json(['message' => 'Erro ao cadastar usuário'], 500);
     }
 }
