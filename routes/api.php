@@ -9,7 +9,7 @@ use App\Http\Middleware\ProtectedRoute;
 
 Route::post("/login", [AuthController::class, "login"]);
 
-Route::prefix('users')->group(function () {
+Route::prefix("users")->group(function () {
     Route::middleware([ProtectedRoute::class])->group(function () {
         Route::patch("/{email}/updatepassword", [UserController::class, "updatePassword"]);
     });
@@ -20,9 +20,10 @@ Route::prefix('users')->group(function () {
     Route::post("/saveUser", [UserController::class, "saveUser"]);
 });
 
-Route::prefix('categories')->group(function () {
+Route::prefix("categories")->group(function () {
     Route::middleware([AdminToken::class])->group(function () {
         Route::get("/getAll", [CategoryController::class, "getAllCategories"]);
+        Route::post("/saveCategory", [CategoryController::class, "saveCategory"]);
     });
 });
 
