@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\CategoryController;
 use App\Http\Middleware\AdminToken;
 use App\Http\Middleware\ProtectedRoute;
 
@@ -19,3 +19,10 @@ Route::prefix('users')->group(function () {
     Route::patch("/{email}/activeAccount", [UserController::class, "activeAccount"]);
     Route::post("/saveUser", [UserController::class, "saveUser"]);
 });
+
+Route::prefix('categories')->group(function () {
+    Route::middleware([AdminToken::class])->group(function () {
+        Route::get("/getAll", [CategoryController::class, "getAllCategories"]);
+    });
+});
+
