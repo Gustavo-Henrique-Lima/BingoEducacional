@@ -15,7 +15,7 @@ class AuthController extends Controller
      * @OA\Post(
      *     tags={"Auth"},
      *     summary="Login",
-     *     description="This endpoint get and authentic a user.",
+     *     description="This endpoint is used to get and authentic a user.",
      *     path="/api/auth/login",
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -40,7 +40,7 @@ class AuthController extends Controller
      *         response=401,
      *         description="Unauthorized",
      *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Usuário e/ou senha inválidos"),
+     *             @OA\Property(property="error", type="string", example="Usuário e/ou senha inválidos."),
      *         )
      *     )
      * )
@@ -50,7 +50,7 @@ class AuthController extends Controller
         $credentials = request(["email", "password"]);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(["error" => "Usuário e/ou senha inválidos"], 401);
+            return response()->json(["error" => "Usuário e/ou senha inválidos."], 401);
         }
 
         return $this->respondWithToken($token);
