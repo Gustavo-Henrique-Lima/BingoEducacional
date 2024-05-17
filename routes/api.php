@@ -11,7 +11,7 @@ Route::post("/login", [AuthController::class, "login"]);
 
 Route::prefix("users")->group(function () {
     Route::middleware([ProtectedRoute::class])->group(function () {
-        Route::patch("/{email}/updatepassword", [UserController::class, "updatePassword"]);
+        Route::patch("/{email}/updatePassword", [UserController::class, "updatePassword"]);
     });
     Route::post("/{email}/saveRecoverPasswordCode", [UserController::class, "saveRecoverPasswordCode"]);
     Route::patch("/{email}/recoverpassword", [UserController::class, "recoverPassword"]);
