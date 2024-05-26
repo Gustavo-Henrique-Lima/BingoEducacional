@@ -265,6 +265,166 @@
                 }
             }
         },
+        "/api/question/saveQuestion": {
+            "post": {
+                "tags": [
+                    "Question"
+                ],
+                "summary": "Save question",
+                "description": "This endpoint is used to save a new question.",
+                "operationId": "dd6f1544f9a5e9d3e44fdec353158a73",
+                "requestBody": {
+                    "content": {
+                        "json": {
+                            "schema": {
+                                "required": [
+                                    "question",
+                                    "answer",
+                                    "password",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "question": {
+                                        "type": "string",
+                                        "example": "Value"
+                                    },
+                                    "answer": {
+                                        "type": "string",
+                                        "example": "Value"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pergunta salva com sucesso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A pergunta deve conter no mínimo 8 caracteres e a resposta no mínimo 3 caracteres."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/question/getByCategory/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Question"
+                ],
+                "summary": "Get all Question",
+                "description": "This endpoint is used to return a collection of Question filtered by category.",
+                "operationId": "b2c5488c5785c7748db4beebaf4e8087",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "The ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "question": {
+                                                        "type": "string",
+                                                        "example": "Value 1"
+                                                    },
+                                                    "answer": {
+                                                        "type": "string",
+                                                        "example": "Value 123"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Forbidden"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/users/{email}/updatePassword": {
             "patch": {
                 "tags": [
@@ -273,6 +433,17 @@
                 "summary": "Update password",
                 "description": "This endpoint is used to update a user's password.",
                 "operationId": "8ec13123a9774071be6013c7e17f7bce",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "json": {
@@ -383,6 +554,17 @@
                 "summary": "Save Recover Password Code",
                 "description": "This endpoint is used to save the verification code for the user's password recovery.",
                 "operationId": "56a28af029047e42ef5c1625ae8263aa",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "json": {
@@ -461,6 +643,17 @@
                 "summary": "Recover password",
                 "description": "This endpoint is used to recover a user's password.",
                 "operationId": "df24f9fda663a8d509e95ebb3594c283",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "json": {
@@ -560,6 +753,17 @@
                 "summary": "Save Activation Code",
                 "description": "This endpoint is used to save the activation verification code of the administrator account.",
                 "operationId": "dcb7f06815ad8e3bef735285f50a04cf",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "json": {
@@ -638,6 +842,17 @@
                 "summary": "Activate Account",
                 "description": "This endpoint is used to activate an administrator's account.",
                 "operationId": "7b8da9ab6399c03cecbf1a68dee3bcc2",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "json": {
@@ -724,14 +939,14 @@
                 }
             }
         },
-        "/api/saveUser": {
+        "/api/users/saveUser": {
             "post": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Save user",
                 "description": "This endpoint is used to save a new user.",
-                "operationId": "99cd8394d3675e3f5d809b4392fdbd89",
+                "operationId": "c68ff1b21515e7db8b090648bf4832be",
                 "requestBody": {
                     "content": {
                         "json": {
