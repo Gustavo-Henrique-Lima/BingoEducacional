@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\QuestionController;
 use App\Http\Middleware\AdminToken;
 use App\Http\Middleware\ProtectedRoute;
 
@@ -24,6 +25,13 @@ Route::prefix("categories")->group(function () {
     Route::middleware([AdminToken::class])->group(function () {
         Route::get("/getAll", [CategoryController::class, "getAllCategories"]);
         Route::post("/saveCategory", [CategoryController::class, "saveCategory"]);
+    });
+});
+
+Route::prefix("question")->group(function () {
+    Route::middleware([AdminToken::class])->group(function () {
+        Route::post("/saveQuestion", [QuestionController::class, "saveQuestion"]);
+        Route::get("/getByCategory/{categoryId}", [QuestionController::class, "getQuestionByCategory"]);
     });
 });
 

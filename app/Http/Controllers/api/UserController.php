@@ -25,6 +25,13 @@ class UserController extends Controller
      *     summary="Update password",
      *     description="This endpoint is used to update a user's password.",
      *     path="/api/users/{email}/updatePassword",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         description="User's email",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
@@ -106,6 +113,13 @@ class UserController extends Controller
      *     summary="Save Recover Password Code",
      *     description="This endpoint is used to save the verification code for the user's password recovery.",
      *     path="/api/users/{email}/saveRecoverPasswordCode",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         description="User's email",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
@@ -170,6 +184,13 @@ class UserController extends Controller
      *     summary="Recover password",
      *     description="This endpoint is used to recover a user's password.",
      *     path="/api/users/{email}/recoverpassword",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         description="User's email",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
@@ -244,6 +265,13 @@ class UserController extends Controller
      *     summary="Save Activation Code",
      *     description="This endpoint is used to save the activation verification code of the administrator account.",
      *     path="/api/users/{email}/saveActivationCode",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         description="User's email",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
@@ -308,6 +336,13 @@ class UserController extends Controller
      *     summary="Activate Account",
      *     description="This endpoint is used to activate an administrator's account.",
      *     path="/api/users/{email}/activeAccount",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="path",
+     *         required=true,
+     *         description="User's email",
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
@@ -381,7 +416,7 @@ class UserController extends Controller
      *     tags={"Users"},
      *     summary="Save user",
      *     description="This endpoint is used to save a new user.",
-     *     path="/api/saveUser",
+     *     path="/api/users/saveUser",
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="json",
