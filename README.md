@@ -7,60 +7,91 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Como Rodar o Projeto
+### Pré-requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2 ou superior
+- Composer 2.0 ou superior
+- MySQL 5.7 ou superior
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Passos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clonar o Repositório:**
 
-## Learning Laravel
+   ## Caso esteja com a chave SSH configurada no seu computador
+   ```bash
+   git clone git@github.com:Gustavo-Henrique-Lima/BingoEducacional.git
+   ````
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   ## Caso não esteja com a chave SSH configurada no seu computador
+    ```bash
+    git clone https://github.com/Gustavo-Henrique-Lima/BingoEducacional.git
+     ````
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. **Navegue até o diretório do projeto:**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```bash
+    cd bingo-educacional
+    ````
 
-## Laravel Sponsors
+    #### Feito isso, abra uma IDE de sua preferência e através do terminal dela siga os passos a seguir.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Instale as dependências:**
 
-### Premium Partners
+    ```bash
+    composer install
+4. **Crie arquivo .env:**
+    ```bash
+    cp .env.example .env
+5. **Atualize as variáveis de ambiente do arquivo .env:**  
+    ### As variáveis que precisam ser atualizadas para rodar o projeto estão nas linhas 23 a 28 do arquivo .env, altere ela conforme as configurações da sua máquina (certifique-se de que a base de dados que você irá informar aqui já exista)
+    ```bash
+    DB_CONNECTION=seuSgbd
+    DB_HOST=127.0.0.1
+    DB_PORT=3306 (Porta padrão de alguns SGBDs, verifique o seu e veja se é necessário alterar algo)
+    DB_DATABASE=suaBaseDados
+    DB_USERNAME=seuUsuario
+    DB_PASSWORD=senhaDoSeuUsuario
+    ```
+6. **Rodar as migrations:**
+    ### Após configurar suas variáveis rode as migrations que irão criar as tabelas no sua base de dados
+    ```bash
+    php artisan migrate
+    ```
+    
+7. **Inicie o servidor de desenvolvimento executando os seguintes comandos:**
+    ```bash
+   php artisan key:generate
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   ```bash
+   php artisan serve
+   ```
+    
+### Agora o servidor está rodando na porta 8000
+## Funcionalidades
+   ### Em breve
+        
+## Documentação
 
-## Contributing
+  O projeto inclui documentação detalhada para facilitar o entendimento e a interação com a aplicação.
+  A seguir estão os recursos de documentação disponíveis.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+  ### Swagger
 
-## Code of Conduct
+   A API é documentada usando o Swagger, que fornece uma interface interativa para explorar os endpoints 
+  da aplicação.
+  ### Acesso ao Swagger:
+  **Com o projeto rodando**
+  
+  O Swagger pode ser acessado através do link: [Swagger UI](http://localhost:8000/api/documentation#/).
+  
+  A interface do Swagger oferece uma visão interativa dos endpoints, permitindo testar as operações
+  diretamente na documentação.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Testes 
+  ### A aplicação conta com alguns testes unitários e de integração que são responsáveis por verificar e validar as funcionalidades do sistema, os testes estão na pasta /tests, para executar os testes execute o seguinte comando
+  ```bash
+  php artisan test
+  ```
+    
