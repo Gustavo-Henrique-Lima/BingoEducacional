@@ -31,7 +31,7 @@
 2. **Navegue até o diretório do projeto:**
 
     ```bash
-    cd bingo-educacional
+    cd BingoEducacional
     ````
 
     #### Feito isso, abra uma IDE de sua preferência e através do terminal dela siga os passos a seguir.
