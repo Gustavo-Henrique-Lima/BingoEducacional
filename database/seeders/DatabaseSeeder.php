@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Question;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,12 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //User::factory(4)->create();
+        User::factory(4)->create();
         Category::factory(4)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test1@example.com',
-        // ]);
+        $this->call(QuestionSeeder::class);
     }
 }
