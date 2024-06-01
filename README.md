@@ -18,12 +18,12 @@
 
 1. **Clonar o Repositório:**
 
-   ## Caso esteja com a chave SSH configurada no seu computador
+   ### Caso esteja com a chave SSH configurada no seu computador
    ```bash
    git clone git@github.com:Gustavo-Henrique-Lima/BingoEducacional.git
    ````
 
-   ## Caso não esteja com a chave SSH configurada no seu computador
+   ### Caso não esteja com a chave SSH configurada no seu computador
     ```bash
     git clone https://github.com/Gustavo-Henrique-Lima/BingoEducacional.git
      ````
@@ -34,17 +34,19 @@
     cd BingoEducacional
     ````
 
-    #### Feito isso, abra uma IDE de sua preferência e através do terminal dela siga os passos a seguir.
-
 3. **Instale as dependências:**
 
     ```bash
     composer install
+    ````
+    
 4. **Crie arquivo .env:**
     ```bash
     cp .env.example .env
+    ````
+    
 5. **Atualize as variáveis de ambiente do arquivo .env:**  
-    ### As variáveis que precisam ser atualizadas para rodar o projeto estão nas linhas 23 a 28 do arquivo .env, altere ela conforme as configurações da sua máquina (certifique-se de que a base de dados que você irá informar aqui já exista)
+    #### As variáveis que precisam ser atualizadas para rodar o projeto estão nas linhas 23 a 28 do arquivo .env, altere ela conforme as configurações da sua máquina (certifique-se de     que a base de dados que você irá informar aqui já exista)
     ```bash
     DB_CONNECTION=seuSgbd
     DB_HOST=127.0.0.1
@@ -54,12 +56,17 @@
     DB_PASSWORD=senhaDoSeuUsuario
     ```
 6. **Rodar as migrations:**
-    ### Após configurar suas variáveis rode as migrations que irão criar as tabelas no sua base de dados
+    #### Após configurar suas variáveis rode as migrations que irão criar as tabelas na sua base de dados.
     ```bash
     php artisan migrate
     ```
+7. **Popular a base de dados com dados de teste:**
+    #### Após criar as tabelas rode o seeder que irá popular a base de dados com dados de teste.
+    ```bash
+    php artisan db:seed
+    ```
     
-7. **Inicie o servidor de desenvolvimento executando os seguintes comandos:**
+8. **Inicie o servidor de desenvolvimento executando os seguintes comandos:**
     ```bash
    php artisan key:generate
    ```
@@ -68,7 +75,7 @@
    php artisan serve
    ```
     
-### Agora o servidor está rodando na porta 8000
+#### Feito isso o servidor está rodando na porta 8000
 ## Funcionalidades
    ### Em breve
         
