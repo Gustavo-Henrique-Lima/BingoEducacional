@@ -37,10 +37,8 @@ class AdminToken
             return response()->json(["error" => "Forbidden"], 403);
         }
 
-        // Configure o relógio do sistema para validar se o token não expirou
        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
-       // Valide a assinatura e se não expirou
        $constraints = [
            new ValidAt($clock)
        ];

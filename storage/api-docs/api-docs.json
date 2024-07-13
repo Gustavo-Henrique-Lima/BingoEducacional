@@ -265,6 +265,188 @@
                 }
             }
         },
+        "/api/game/createGame": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Save Game",
+                "description": "This endpoint is used to save a new game.",
+                "operationId": "c62d28b463309ace1eeb4e5be9497b75",
+                "requestBody": {
+                    "content": {
+                        "json": {
+                            "schema": {
+                                "required": [
+                                    "questions",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "questions": {
+                                        "description": "Array of question IDs",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "example": "[1, 2]"
+                                    },
+                                    "name": {
+                                        "description": "Name of the game",
+                                        "type": "string",
+                                        "example": "Teste jogo 3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Jogo criado com sucesso!"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/game/myGames": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get Game By Owner",
+                "description": "This endpoint is used to get all games by owner",
+                "operationId": "5aca4df9a3f60b96bdaac88874774213",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Array of game objects",
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Teste de nome de jogo"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-07-13T13:23:16.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/game/{id}": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get Game By id",
+                "description": "This endpoint is used to get game by id",
+                "operationId": "be7fa18843b2e32b17f080e211a0a02b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Game id",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Detailed information of a single game including related questions",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Teste jogo 3"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-07-13T13:32:45.000000Z"
+                                                },
+                                                "questions": {
+                                                    "description": "Array of related questions with their answers",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "question": {
+                                                                "type": "string",
+                                                                "example": "What is the capital of France?"
+                                                            },
+                                                            "answer": {
+                                                                "type": "string",
+                                                                "example": "Paris"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/question/saveQuestion": {
             "post": {
                 "tags": [

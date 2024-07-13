@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\QuestionController;
 use App\Http\Middleware\AdminToken;
 use App\Http\Middleware\ProtectedRoute;
@@ -35,3 +36,10 @@ Route::prefix("question")->group(function () {
     });
 });
 
+Route::prefix("game")->group(function () {
+    Route::middleware([AdminToken::class])->group(function () {
+        Route::post("/createGame", [GameController::class, "createGame"]);
+        Route::get("/myGames", [GameController::class, "getGameByOwner"]);
+        Route::get("/{id}", [GameController::class, "getGameById"]);
+    });
+});
