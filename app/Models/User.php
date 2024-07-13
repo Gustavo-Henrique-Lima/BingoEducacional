@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -62,6 +61,16 @@ class User extends Authenticatable implements JWTSubject
             "email" => $this->email,
             "role" => $this->role,
             "active" => $this->isActive
-         ];
+        ];
+    }
+
+    public function games()
+    {
+        return $this->belongsToMany(Game::class, 'game_user');
+    }
+
+    public function ownedGames()
+    {
+        return $this->hasMany(Game::class, 'owner_id');
     }
 }

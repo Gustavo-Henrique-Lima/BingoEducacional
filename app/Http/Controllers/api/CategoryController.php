@@ -121,7 +121,7 @@ class CategoryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json("A categoria deve conter no mínimo 3 caracteres.", 422);
+            return response()->json(["message" => "A categoria deve conter no mínimo 3 caracteres."], 422);
         }
 
         $existCategory = $this->categoryService->findCategory($request->name);
