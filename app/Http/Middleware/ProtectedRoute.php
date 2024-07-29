@@ -20,7 +20,7 @@ class ProtectedRoute
     {
         $this->config = Configuration::forSymmetricSigner(
             new Sha256(),
-            InMemory::plainText("s7m5d9g0yh2imZ0kQbIXTIJNz2jper7PfI0MbIs77GoXQmqce4uKXFZaSAV5Icno") // Use uma chave forte
+            InMemory::plainText("s7m5d9g0yh2imZ0kQbIXTIJNz2jper7PfI0MbIs77GoXQmqce4uKXFZaSAV5Icno")
         );
     }
 
