@@ -67,8 +67,12 @@
     ```
     
 8. **Inicie o servidor de desenvolvimento executando os seguintes comandos:**
-    ```bash
+   ```bash
    php artisan key:generate
+   ```
+
+   ```bash
+   php artisan jwt:secret
    ```
 
    ```bash

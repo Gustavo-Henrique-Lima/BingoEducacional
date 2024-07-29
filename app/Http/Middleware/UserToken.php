@@ -18,10 +18,9 @@ class UserToken
 
     public function __construct()
     {
-        // Configure the signing configuration (secret key here is just an example)
         $this->config = Configuration::forSymmetricSigner(
             new Sha256(),
-            InMemory::plainText("s7m5d9g0yh2imZ0kQbIXTIJNz2jper7PfI0MbIs77GoXQmqce4uKXFZaSAV5Icno") // Use a strong key here
+            InMemory::plainText("s7m5d9g0yh2imZ0kQbIXTIJNz2jper7PfI0MbIs77GoXQmqce4uKXFZaSAV5Icno")
         );
     }
 
@@ -37,10 +36,8 @@ class UserToken
             return response()->json(["error" => "Forbidden"], 403);
         }
 
-        // Configure o relógio do sistema para validar se o token não expirou
        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
-       // Valide a assinatura e se não expirou
        $constraints = [
            new ValidAt($clock)
        ];
