@@ -10,9 +10,9 @@
 ## Como Rodar o Projeto
 ### Pré-requisitos
 
-- PHP 8.2 ou superior
-- Composer 2.0 ou superior
-- MySQL 5.7 ou superior
+- [PHP](https://www.php.net/downloads.php)  8.2 ou superior
+- [Composer](https://getcomposer.org/download/) 2.0 ou superior
+- [MySQL](https://dev.mysql.com/downloads/workbench/) 5.7 ou superior
 
 ### Passos
 
